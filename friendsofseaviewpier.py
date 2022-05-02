@@ -1,5 +1,5 @@
 name_db = []
-volunteer_bln = []
+volunteers = []
 volunteer_type = []
 am_paid_bln = []
 date_of_joining = []
@@ -17,6 +17,15 @@ def count_much(words, word_to_count):
             count = count + 1
             username_ass.append(name_db[pos])
     return username_ass, count
+def count_much_vol(words, word_to_count):
+    count = 0
+    username_ass = []
+    for word in words:
+        if word == word_to_count:
+            pos = words.index(word_to_count, count)
+            count = count + 1
+            username_ass.append(volunteers[pos])
+    return username_ass, count
 def registration_mode():
     while True:
         first_last_name = input("Enter first and last name in the following format firstname_lastname: ")
@@ -24,7 +33,7 @@ def registration_mode():
         while True:
                     vol_or_not = input("Do you wish to volunteer? y/n  ")
                     if vol_or_not == 'y':
-                        volunteer_bln.append(vol_or_not)
+                        volunteers.append(first_last_name)
                         type_vol = input("Please enter which area you want to volunteer: pier entrance gate [peir_gate] or gift shop [gift_shop] or painting/decorating [painting_decoration]   ")
                     else:
                         break
@@ -42,7 +51,6 @@ def registration_mode():
                         continue
     
                     elif vol_or_not == 'n':
-                        volunteer_bln.append(vol_or_not)
                         break
                     elif vol_or_not != 'y' or 'n':
                         print('error please correctly choose y/n')
@@ -97,8 +105,8 @@ def registration_mode():
         break
 
 def data_insight():
-    print(f"Members who have chosen to work as volunteers: {count_much(volunteer_bln, 'y')},")
-    print(f"Peir Gate: {count_much(volunteer_type, 'peir_gate')} | Gift Shop: {count_much(volunteer_type, 'gift_shop')} | Paint and Decorating: {count_much(volunteer_type, 'painting_decoration')}")
+    print(f"Members who have chosen to work as volunteers: {volunteers} {len(volunteers)},")
+    print(f"Peir Gate: {count_much_vol(volunteer_type, 'peir_gate')} | Gift Shop: {count_much_vol(volunteer_type, 'gift_shop')} | Paint and Decorating: {count_much_vol(volunteer_type, 'painting_decoration')}")
     print(f"Members who has not paid: {count_much(paid_fee, 'not_paid')}")
 def sponsor():
     while True:
